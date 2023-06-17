@@ -19,7 +19,7 @@ type Gwo struct {
 	dimension         int
 	numberOfWolf      int
 	iteration         int
-	population        []*wolf // this must be a slice of pointer because of the assignment in for range
+	population        []wolf // this must be a slice of pointer because of the assignment in for range
 	objectiveFunction ObjectiveFunction
 	alpha             wolf
 	beta              wolf
@@ -36,8 +36,8 @@ func (gwo *Gwo) Run() {
 		// A decrease linearly from 2 to 0
 		a := 2 - float64(currentIteration)*(2.0/float64(gwo.iteration))
 		// Update position of each wolf
-		for _, wolf := range gwo.population {
-			for iPos, pos := range wolf.positions {
+		for i, _ := range gwo.population {
+			for iPos, pos := range gwo.population[i].positions {
 				r1 := rand.Float64()
 				r2 := rand.Float64()
 
@@ -75,9 +75,9 @@ func (gwo *Gwo) Run() {
 					newPos = gwo.lowerBound[iPos]
 				}
 
-				wolf.positions[iPos] = newPos
+				gwo.population[i].positions[iPos] = newPos
 			}
-			wolf.value = gwo.objectiveFunction(wolf.positions)
+			gwo.population[i].value = gwo.objectiveFunction(gwo.population[i].positions)
 			//fmt.Printf("%d - %p - %v\n", currentIteration, wolf, wolf.positions)
 		}
 
@@ -114,7 +114,7 @@ func (gwo *Gwo) initialization() {
 		}
 
 		value := gwo.objectiveFunction(newPosition)
-		gwo.population = append(gwo.population, &wolf{positions: newPosition, value: value})
+		gwo.population = append(gwo.population, wolf{positions: newPosition, value: value})
 	}
 
 	gwo.alpha = wolf{
