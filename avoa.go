@@ -54,7 +54,7 @@ func (avoa *Avoa) initialization() {
 }
 
 func (avoa *Avoa) findBest() {
-	for i, _ := range avoa.population {
+	for i := range avoa.population {
 		if avoa.population[i].value < avoa.best1.value {
 			avoa.best1.value = avoa.population[i].value
 			copy(avoa.best1.positions, avoa.population[i].positions)
@@ -80,7 +80,7 @@ func (avoa *Avoa) Run() {
 		P1 := (2*rand.Float64()+1)*(1-(float64(currentIteration)/float64(avoa.iteration))) + a
 
 		// Update position of each wolf
-		for i, _ := range avoa.population {
+		for i := range avoa.population {
 			vult := &avoa.population[i]
 			F := P1 * (2.0*rand.Float64() - 1)
 
@@ -118,7 +118,7 @@ func (avoa *Avoa) exploration(randomSelectIndex int, F float64, currentVulture *
 	} else {
 		r2 := rand.Float64()
 		r3 := rand.Float64()
-		for i, _ := range currentVulture.positions {
+		for i := range currentVulture.positions {
 			currentVulture.positions[i] = randomSelectVulture.positions[i] - F +
 				r2*((avoa.upperBound[i]-avoa.lowerBound[i])*r3+avoa.lowerBound[i])
 		}
