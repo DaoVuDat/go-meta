@@ -2,10 +2,10 @@ package main
 
 import (
 	"math"
+	"testing"
 )
 
-func main() {
-
+func BenchmarkGwo(b *testing.B) {
 	dimension := 30
 
 	lowerValue := -100.0
@@ -32,29 +32,11 @@ func main() {
 	gwo := Gwo{
 		numberOfWolf:      30,
 		dimension:         dimension,
-		iteration:         500,
+		iteration:         b.N,
 		lowerBound:        lowerBound,
 		upperBound:        upperBound,
 		objectiveFunction: objectiveFunction,
 	}
 
 	gwo.Run()
-
-	avoa := Avoa{
-		numberOfWolf:      30,
-		dimension:         dimension,
-		iteration:         500,
-		lowerBound:        lowerBound,
-		upperBound:        upperBound,
-		objectiveFunction: objectiveFunction,
-		p1:                0.6,
-		p2:                0.4,
-		p3:                0.6,
-		alpha:             0.8,
-		betha:             0.2,
-		gamma:             2.5,
-	}
-
-	avoa.Run()
-
 }
