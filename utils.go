@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"math/rand"
 )
 
@@ -32,4 +33,20 @@ func RWS(probabilities []float64) int {
 	}
 
 	return index
+}
+
+func LevyFlight(dimension int) []float64 {
+	beta := 1.5
+	sigma := math.Pow((math.Gamma(1.0+beta)*math.Sin(math.Pi*beta/2.0))/
+		(math.Gamma((1+beta)/2)*beta*math.Pow(2, (beta-1)/2)), 1/beta)
+
+	o := make([]float64, dimension)
+	for i := range o {
+		u := rand.Float64() * sigma
+		v := rand.Float64()
+		step := u / (math.Pow(math.Abs(v), 1/beta))
+		o[i] = step
+	}
+
+	return o
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
 )
@@ -69,9 +68,7 @@ func (gwo *Gwo) Run() {
 
 				if newPos > gwo.upperBound[iPos] {
 					newPos = gwo.upperBound[iPos]
-				}
-
-				if newPos < gwo.lowerBound[iPos] {
+				} else if newPos < gwo.lowerBound[iPos] {
 					newPos = gwo.lowerBound[iPos]
 				}
 
@@ -85,8 +82,8 @@ func (gwo *Gwo) Run() {
 		gwo.findBest()
 
 		// Print information
-		fmt.Printf("Iteration %d ", currentIteration+1)
-		fmt.Printf("=> Best value: %E\n", gwo.alpha.value)
+		//fmt.Printf("Iteration %d ", currentIteration+1)
+		//fmt.Printf("=> Best value: %E\n", gwo.alpha.value)
 	}
 }
 

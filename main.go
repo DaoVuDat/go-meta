@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"math"
+	"time"
 )
 
 func main() {
@@ -27,7 +29,6 @@ func main() {
 		}
 		return sum
 	}
-
 	// create gwo struct
 	gwo := Gwo{
 		numberOfWolf:      30,
@@ -38,7 +39,11 @@ func main() {
 		objectiveFunction: objectiveFunction,
 	}
 
+	start := time.Now()
 	gwo.Run()
+	end := time.Since(start)
+	fmt.Printf("GWO tooks %s\n", end)
+	fmt.Printf("==> Best value: %E\n", gwo.alpha.value)
 
 	avoa := Avoa{
 		numberOfWolf:      30,
@@ -55,6 +60,10 @@ func main() {
 		gamma:             2.5,
 	}
 
+	start = time.Now()
 	avoa.Run()
+	end = time.Since(start)
+	fmt.Printf("AVOA tooks %s\n", end)
+	fmt.Printf("==> Best value: %E\n", avoa.best1.value)
 
 }
