@@ -35,7 +35,7 @@ func (gwo *Gwo) Run() {
 		// A decrease linearly from 2 to 0
 		a := 2 - float64(currentIteration)*(2.0/float64(gwo.iteration))
 		// Update position of each wolf
-		for i, _ := range gwo.population {
+		for i := range gwo.population {
 			for iPos, pos := range gwo.population[i].positions {
 				r1 := rand.Float64()
 				r2 := rand.Float64()
